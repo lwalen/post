@@ -30,7 +30,7 @@ if (currentUser()) {
 		$contents = preg_replace('@^>(.*)@', '<em>&gt;$1</em>', $contents);
 ?>
 	<div class='post' id='<?= $id ?>'>
-	<div class='user'><?= $user ?></div>
+	<div class='user<?= $user == currentUser() ? " self" : "" ?>'><?= $user ?></div>
 	<div class='datetime'><?= $datetime ?></div>
 	<div class='clear'></div>
 <?php

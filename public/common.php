@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-require_once "/srv/http/post/include/config.inc";
+require_once '/srv/http/post/include/config.inc';
+require_once 'colors.php';
 
 class Post {
 	public $contents = "";
@@ -38,8 +39,8 @@ function addUser($name, $password, $confirm_password) {
 	$safe_name = mysqli_real_escape_string($db, $name);
 	$hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-	$query  = "INSERT INTO users (name, password) ";
-	$query .= "VALUES ('$safe_name', '$hashed_password');";
+	$query  = "INSERT INTO users (name, password, color_id) ";
+	$query .= "VALUES ('$safe_name', '$hashed_password', 0);";
 
 	$result = mysqli_query($db, $query);
 
@@ -87,6 +88,31 @@ function getUser($id) {
 	return $user;
 }
 
+function getUsersColor($name) {
+	$db = connectToDB();
+
+	$query  = "SELECT c.id, c.name, c.hex, c.lighter ";
+	$query .= "FROM colors as c, users ";
+	$query .= "WHERE users.name = '$name' ";
+	$query .= "AND users.color_id = c.id; ";
+
+	$result = mysqli_query($db, $query);
+	if ($result == false) {
+		return false;
+	}
+
+	$color = "";
+
+	while ($row = mysqli_fetch_array($result)) {
+		$color = new Color($row['id'],
+			$row['name'],
+			$row['hex'],
+			$row['lighter']);
+	}
+
+	return $color;
+}
+
 function getHashedPassword($name) {
 	$db = connectToDB();
 
@@ -119,6 +145,8 @@ function currentUser() {
 
 function currentUserID() {
 	if (currentUser()) {
+		if (isset($_SESSION['user_id'])) return $_SESSION['user_id'];
+
 		$db = connectToDB();
 
 		$query  = "SELECT id FROM users ";

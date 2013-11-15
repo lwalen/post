@@ -1,20 +1,38 @@
+<?php
+require_once 'common.php';
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>posts</title>
 
-	<link href="/css/main.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/controls.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/post.css" rel="stylesheet" type="text/css"/>
+<?php
+foreach (scandir('css/') as $file) {
+	if (!preg_match('@^\.@', $file)) {
+?>
+	<link href="css/<?= $file ?>" rel="stylesheet" type="text/css"/>
+<?php
+	}
+}
+?>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src='/js/post.js' type='text/javascript'></script>
+<?php
+foreach (scandir('js/') as $file) {
+	if (!preg_match('@^\.@', $file)) {
+?>
+	<script src='js/<?= $file ?>' type='text/javascript'></script>
+<?php
+	}
+}
+?>
 </head>
 <body>
 	<div class='container'>
 
 <?php
-
-require_once 'common.php';
+$colors = allColors();
+$user_color = getUsersColor(currentUser());
 
 if (!isset($_SESSION['user'])) {
 	include 'sign_in.php';
@@ -23,7 +41,17 @@ if (!isset($_SESSION['user'])) {
 ?>
 
 <div class='controls'>
-	<p class='current-user'><?= currentUser() ?></p>
+<p class='current-user'><?= currentUser() ?></p>
+	<select class='color'>
+<?php 
+	foreach ($colors as $color) { 
+		$codes = $color->id . "|" . $color->hex . "|" . $color->lighter;
+?>
+	<option value='<?= $codes ?>'<?= $color->name == $user_color->name ? ' selected' : '' ?>>
+			<?= $color->name ?>
+		</option>
+<?php } ?>
+	</select>
 	<p class='sign-out'><a href='/sign_out.php'>sign out</a></p>
 	<div class='clear'></div>
 </div>

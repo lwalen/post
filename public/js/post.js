@@ -1,4 +1,12 @@
 
+function reloadPosts() {
+	console.log('Reloading posts');
+	$('.posts').load('posts.php', function() {
+		console.log('Reloaded posts');
+		$.getScript("/js/colors.js");
+	});
+}
+
 function addPost() {
 	var contents = $('.add-contents').val();
 
@@ -9,7 +17,7 @@ function addPost() {
 				{ contents: contents },
 				function() {
 					$('.add-contents').val("");
-					$('.posts').load('posts.php');
+					reloadPosts();
 				});
 	}
 }
@@ -19,7 +27,7 @@ function deletePost(id) {
 	$.post( "delete_post.php", 
 			{ id: id }, 
 			function() {
-				$('.posts').load('posts.php');
+				reloadPosts();
 			});
 }
 
@@ -29,7 +37,7 @@ $(document).ready(function() {
 	$('.add-post').on('click', '.add-submit', addPost);
 
 	$('.add-post').on('keypress', '.add-contents', function(event) {
-		if(event.which == 13 && $('.add-contents').val().length > 0) {
+		if(event.which == 13) {
 			addPost();
 		}
 	});
@@ -42,7 +50,7 @@ $(document).ready(function() {
 
 	// Reload posts every 30 seconds
 	setInterval(function() {
-		$('.posts').load('posts.php');
+		reloadPosts();
 	}, 30000);
 
 });
