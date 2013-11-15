@@ -18,6 +18,10 @@
 	font-size: .8em;
 }
 
+.delete-post {
+	float: right;
+}
+
 .add-post {
 	border: 1px solid gray;
 }

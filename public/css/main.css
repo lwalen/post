@@ -17,3 +17,8 @@
 .account input[type="password"] {
 	border: 1px solid gray;
 }
+
+em {
+	color: green;
+	font-style: normal;
+}

@@ -7,12 +7,14 @@ class Post {
 	public $contents = "";
 	public $datetime = "";
 	public $user = "";
+	public $id = "";
 
-	function __construct($contents, $datetime, $user) {
+	function __construct($contents, $datetime, $user, $id) {
 		$this->contents = $contents;
 		$date = new DateTime($datetime);
 		$this->datetime = $date->format("n.j.y g:i");
 		$this->user = $user;
+		$this->id = $id;
 	}
 }
 
@@ -42,6 +44,27 @@ function addUser($name, $password, $confirm_password) {
 	$result = mysqli_query($db, $query);
 
 	header("Location: //post.walen.me");
+}
+
+function getAuthorOfPost($id) {
+	$db = connectToDB();
+
+	$query  = "SELECT name FROM users, posts ";
+	$query .= "WHERE posts.id = $id ";
+	$query .= "AND posts.user_id = users.id; ";
+
+	$result = mysqli_query($db, $query);
+	if ($result == false) {
+		return false;
+	}
+
+	$user = "";
+
+	while ($row = mysqli_fetch_array($result)) {
+		$user = $row['name'];
+	}
+
+	return $user;
 }
 
 function getUser($id) {

@@ -23,4 +23,17 @@ $(document).ready(function() {
 			addPost();
 		}
 	});
+
+	$('.posts').on('click', '.delete-post', function() {
+		var id = $(this).parent().attr('id');
+
+		console.log('Deleting: ' + id);
+
+		$.post( "delete_post.php", 
+			{ id: id }, 
+			function() {
+				$('.posts').load('posts.php');
+			});
+	});
+
 });

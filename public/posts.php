@@ -13,7 +13,10 @@ if (currentUser()) {
 	$posts = [];
 
 	while ($row = mysqli_fetch_array($result)) {
-		$post = new Post($row['contents'], $row['time'], getUser($row['user_id']));
+		$post = new Post($row['contents'],
+			$row['time'],
+			getUser($row['user_id']),
+			$row['id']);
 		$posts[] = $post;
 	}
 
@@ -21,15 +24,15 @@ if (currentUser()) {
 		$contents = $post->contents;
 		$datetime = $post->datetime;
 		$user = $post->user;
+		$id = $post->id;
 
-		$url_pattern = '@(http)?(s)?(://)?(([-\w]+\.)+([^\s]+)+[^,.\s])@';
-		$link_pattern = '<a href="http$2://$4">$1$2$3$4</a>';
-		$contents = preg_replace($url_pattern, $link_pattern, $contents);
+		$contents = preg_replace('@^>(.*)@', '<em>&gt;$1</em>', $contents);
 ?>
-<div class='post'>
+	<div class='post' id='<?= $id ?>'>
 	<div class='user'><?= $user ?></div>
 	<div class='datetime'><?= $datetime ?></div>
 	<div class='clear'></div>
+	<div class='delete-post'><a href='#'>delete</a></div>
 	<div class='contents'><?= $contents ?></div>
 </div>
 <?php
