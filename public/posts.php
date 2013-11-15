@@ -32,7 +32,13 @@ if (currentUser()) {
 	<div class='user'><?= $user ?></div>
 	<div class='datetime'><?= $datetime ?></div>
 	<div class='clear'></div>
+<?php
+		if ($user == currentUser()) {
+?>
 	<div class='delete-post'><a href='#'>delete</a></div>
+<?php
+		}
+?>
 	<div class='contents'><?= $contents ?></div>
 </div>
 <?php
