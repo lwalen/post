@@ -1,0 +1,15 @@
+.controls {
+	margin-bottom: 20px;
+}
+
+.current-user {
+	float: left;
+}
+
+.sign-out {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}

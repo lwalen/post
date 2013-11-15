@@ -1,0 +1,35 @@
+.post {
+	border: 1px solid gray;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+.contents {
+	color: #333;
+}
+
+.user {
+	float: left;
+}
+
+.datetime {
+	float: right;
+	color: #aaa;
+	font-size: .8em;
+}
+
+.add-post {
+	border: 1px solid gray;
+}
+
+.add-post table {
+	width: 100%;
+}
+
+.add-contents {
+	width: 100%;
+}
+
+.expand {
+	width: 100%;
+}

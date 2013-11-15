@@ -1,0 +1,19 @@
+.container {
+	width: 600px;
+	margin: 40px auto;
+	padding: 10px;
+	border: 1px solid gray;
+}
+
+.account input {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.account input[type="text"] {
+	border: 1px solid gray;
+}
+
+.account input[type="password"] {
+	border: 1px solid gray;
+}

@@ -1,0 +1,7 @@
+<?php
+// database connection credentials
+define("DB_HOST", "hostname");
+define("DB_USER", "user");
+define("DB_PASS", "pass");
+define("DB_NAME", "post_db");
+?>
