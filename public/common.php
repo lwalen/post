@@ -168,3 +168,43 @@ function currentUserID() {
 		return false;
 	}
 }
+
+function stylesheets() {
+	foreach (scandir('css/') as $file) {
+		if (!preg_match('@^\.@', $file)) {
+?>
+	<link href="css/<?= $file ?>" rel="stylesheet" type="text/css"/>
+<?php
+		}
+	}
+}
+
+function javascripts() {
+	foreach (scandir('js/') as $file) {
+		if (!preg_match('@^\.@', $file)) {
+?>
+	<script src='js/<?= $file ?>' type='text/javascript'></script>
+<?php
+		}
+	}
+}
+
+function colorSelector() {
+?>
+	<select class='color-selector'>
+<?php
+	$colors = allColors();
+	$user_color = getUsersColor(currentUser());
+
+	foreach ($colors as $color) { 
+		$codes = $color->id . "|" . $color->hex . "|" . $color->lighter;
+		$selected = $color->name == $user_color->name ? ' selected' : '';
+?>
+		<option value='<?= $codes ?>'<?= $selected ?>><?= $color->name ?></option>
+<?php 
+	}
+?>
+	</select>
+<?php
+} 
+?>

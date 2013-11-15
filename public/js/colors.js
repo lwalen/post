@@ -1,7 +1,7 @@
 
 function updateColors() {
-	if ($('.color')[0]) {
-		var colors = $('.color').val().split('|');
+	if ($('.color-selector')[0]) {
+		var colors = $('.color-selector').val().split('|');
 		$('.self').css('color', '#' + colors[1]);
 		$('.container').css('background-color', '#' + colors[2]);
 		console.log('Updated colors');
@@ -9,7 +9,7 @@ function updateColors() {
 }
 
 function setColor() {
-	var color_id = $('.color').val().split('|')[0];
+	var color_id = $('.color-selector').val().split('|')[0];
 	$.post("set_color.php", 
 			{ id: color_id }, 
 			function() {
@@ -21,7 +21,7 @@ function setColor() {
 $(document).ready(function() {
 	updateColors();
 
-	$('.controls').on('change', '.color', function(event) {
+	$('.controls').on('change', '.color-selector', function(event) {
 		updateColors();
 		setColor();
 	});

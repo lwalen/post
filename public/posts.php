@@ -30,18 +30,18 @@ if (currentUser()) {
 		$contents = preg_replace('@^>(.*)@', '<em>&gt;$1</em>', $contents);
 ?>
 	<div class='post' id='<?= $id ?>'>
-	<div class='user<?= $user == currentUser() ? " self" : "" ?>'><?= $user ?></div>
-	<div class='datetime'><?= $datetime ?></div>
-	<div class='clear'></div>
+		<div class='user<?= $user == currentUser() ? " self" : "" ?>'><?= $user ?></div>
+		<div class='datetime'><?= $datetime ?></div>
+		<div class='clear'></div>
 <?php
 		if ($user == currentUser()) {
 ?>
-	<div class='delete-post'><a href='#'>delete</a></div>
+		<div class='delete-post'><a href='#'>delete</a></div>
 <?php
 		}
 ?>
-	<div class='contents'><?= $contents ?></div>
-</div>
+		<div class='contents'><?= $contents ?></div>
+	</div>
 <?php
 	}
 } else {
