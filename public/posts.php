@@ -26,6 +26,7 @@ if (currentUser()) {
 		$user = $post->user;
 		$id = $post->id;
 
+		// greentexting
 		$contents = preg_replace('@^>(.*)@', '<em>&gt;$1</em>', $contents);
 ?>
 	<div class='post' id='<?= $id ?>'>

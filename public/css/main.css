@@ -3,6 +3,7 @@
 	margin: 40px auto;
 	padding: 10px;
 	border: 1px solid gray;
+	background-color: #dff;
 }
 
 .account input {
@@ -10,11 +11,11 @@
 	margin-bottom: 5px;
 }
 
-.account input[type="text"] {
+input[type="text"] {
 	border: 1px solid gray;
 }
 
-.account input[type="password"] {
+input[type="password"] {
 	border: 1px solid gray;
 }
 

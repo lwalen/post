@@ -14,8 +14,18 @@ function addPost() {
 	}
 }
 
+function deletePost(id) {
+	console.log('Deleting: ' + id);
+	$.post( "delete_post.php", 
+			{ id: id }, 
+			function() {
+				$('.posts').load('posts.php');
+			});
+}
+
 $(document).ready(function() {
 
+	// Add post event
 	$('.add-post').on('click', '.add-submit', addPost);
 
 	$('.add-post').on('keypress', '.add-contents', function(event) {
@@ -24,16 +34,15 @@ $(document).ready(function() {
 		}
 	});
 
+	// Delete post
 	$('.posts').on('click', '.delete-post', function() {
 		var id = $(this).parent().attr('id');
-
-		console.log('Deleting: ' + id);
-
-		$.post( "delete_post.php", 
-			{ id: id }, 
-			function() {
-				$('.posts').load('posts.php');
-			});
+		deletePost(id);
 	});
+
+	// Reload posts every 30 seconds
+	setInterval(function() {
+		$('.posts').load('posts.php');
+	}, 30000);
 
 });
